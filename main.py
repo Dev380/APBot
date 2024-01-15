@@ -5,8 +5,8 @@ import motor.motor_asyncio as motor
 import discord
 from discord.ext import commands
 
-database_password = os.environ.get("DATABASE_PASSWORD")
-db_client = motor.AsyncIOMotorClient(database_password)
+database_url = os.environ.get("DATABASE_URL")
+db_client = motor.AsyncIOMotorClient(database_url)
 db = db_client["ap-students"]
 
 config_file = open('config.json')
