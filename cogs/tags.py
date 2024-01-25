@@ -147,7 +147,7 @@ class Tags(commands.Cog):
             await interaction.followup.send(maybe_tag["value"], files=files, allowed_mentions=ALLOWED_MENTIONS)
         else:
             embed = FAILURE_EMBED
-            embed.title = "Tag bytesbytesnot found"
+            embed.title = "Tag not found"
             await interaction.followup.send(embed=embed)
 
     @app_commands.check(can_make_tags)
