@@ -2,7 +2,7 @@ import motor
 import io
 import nextcord
 from nextcord.ext import commands
-from nextcord import app_commands
+from nextcord import slash_commands
 
 ROLE_CAN_MAKE_TAGS = ["Chat Moderator", "Admin", "Honorable"]
 
@@ -129,11 +129,11 @@ class Tags(commands.Cog):
         self.bot = bot
         self.tag_db = tag_db
 
-        new_tag_menu = app_commands.ContextMenu(name='New Tag', callback=self.new_tag)
+        new_tag_menu = slash_commands.ContextMenu(name='New Tag', callback=self.new_tag)
         new_tag_menu.add_check(can_make_tags)
         self.bot.tree.add_command(new_tag_menu)
 
-    @app_commands.command(name='tag', description="Uses a tag, replying to the user with the tag contents.")
+    @slash_commands.command(name='tag', description="Uses a tag, replying to the user with the tag contents.")
     async def use_tag(self, interaction: nextcord.Interaction, tag_name: str):
         """
         Uses a tag, replying to the user with the tag contents.
@@ -150,8 +150,8 @@ class Tags(commands.Cog):
             embed.title = "Tag not found"
             await interaction.followup.send(embed=embed)
 
-    @app_commands.check(can_make_tags)
-    @app_commands.command(name='remove_tag', description="Removes a tag, preventing it from being used.")
+    @slash_commands.check(can_make_tags)
+    @slash_commands.command(name='remove_tag', description="Removes a tag, preventing it from being used.")
     async def remove_tag(self, interaction: nextcord.Interaction, tag_name: str):
         """
         Removes a tag, preventing it from being used.
@@ -173,7 +173,7 @@ class Tags(commands.Cog):
 
         await interaction.followup.send(embed=embed)
 
-    @app_commands.command(name='listtags', description="Lists all active tags")
+    @slash_commands.command(name='listtags', description="Lists all active tags")
     async def list_tags(self, interaction: nextcord.Interaction):
         """
         Lists all active tags
